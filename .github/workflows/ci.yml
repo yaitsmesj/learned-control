@@ -1,0 +1,12 @@
+# [permanent practice] CI runs the maths tests on every push: a stranger sees a green tick, you catch regressions.
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --group dev
+      - run: uv run pytest -q
+      - run: uv run python rl/ppo.py --total-steps 2048 --eval-every 1024 --eval-episodes 1 --out /tmp/ci

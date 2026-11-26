@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+runs/*/model.pt
+logs/
+wandb/
+outputs/
+gate/
+*.onnx
+!results/**/*.onnx
